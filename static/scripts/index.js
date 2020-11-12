@@ -20,3 +20,39 @@ function submitUserData() {
   	}
   })
 }
+
+function createDummyClass() {
+  let data = {
+    year: '2020',
+    term: 'sp',
+    subject: 'AAS',
+    number: '100',
+    name: 'Intro Asian American Studies',
+    description: '',
+    credit_hours: '3 hours',
+    section_info: '',
+    degree_attributes: '',
+    schedule_information: '',
+    crn: '00001',
+    section: 'AB1',
+    part_of_term: '1',
+    start_time: 'ARRANGED',
+    end_time: '',
+    days_of_week: '',
+    room: '',
+    building: '',
+    instructors: ''
+  }
+
+  $.ajax({
+  	url:"http://localhost:3000/courses",
+  	type:"POST",
+    data: data,
+  	sucess: function(result){
+  		console.log(result);
+  	},
+  	error: function(error){
+  		console.log('Error ${error}');
+  	}
+  })
+}
