@@ -56,3 +56,26 @@ function createDummyClass() {
   	}
   })
 }
+
+function createDummyGPA() {
+  let data = {
+    crn: "000001",
+    subject: "yeet",
+    number: "110",
+    title: "title",
+    section: "BN1",
+    average: 1.5,
+  }
+
+  $.ajax({
+  	url:"http://localhost:3000/gpa",
+  	type:"POST",
+    data: data,
+  	sucess: function(result){
+  		console.log(result);
+  	},
+  	error: function(error){
+  		console.log('Error ${error}');
+  	}
+  })
+}
