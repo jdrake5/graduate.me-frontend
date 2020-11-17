@@ -13,7 +13,7 @@ input.onchange = e => {
    reader.onload = readerEvent => {
       var content = readerEvent.target.result; // this is the content!
       //console.log( content );
-      console.log(csvJSON(content));
+      //console.log(csvJSON(content));
    }
 
 }
@@ -48,16 +48,16 @@ function csvJSON(csv){
       credit_hours: obj.Credit_Hours,
       section_info: obj.Section_Info,
       degree_attributes: obj.Degree_Attributes,
-      schedule_information: '',
-      crn: '00001',
-      section: 'AB1',
-      part_of_term: '1',
-      start_time: 'ARRANGED',
-      end_time: '',
-      days_of_week: '',
-      room: '',
-      building: '',
-      instructors: ''
+      schedule_information: obj.Schedule_Information,
+      crn: obj.CRN,
+      section: obj.Section,
+      part_of_term: obj.Part_Of_Term,
+      start_time: obj.Start_Time,
+      end_time: obj.End_Time,
+      days_of_week: obj.Days_Of_Week,
+      room: obj.Room,
+      building: obj.Building,
+      instructors: obj.Instructors
     }
 
     $.ajax({
@@ -71,5 +71,6 @@ function csvJSON(csv){
     		console.log('Error ${error}');
     	}
     })
+    break;
   }
 }
