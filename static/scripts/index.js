@@ -79,3 +79,23 @@ function createDummyGPA() {
   	}
   })
 }
+
+function createDummySchedule() {
+  let data = {
+    schedule_name: "schulte",
+    username: "mainstreeter",
+    crn: "00001"
+  }
+
+  $.ajax({
+  	url:"http://localhost:3000/schedule",
+  	type:"POST",
+    data: data,
+  	sucess: function(result){
+  		console.log(result);
+  	},
+  	error: function(error){
+  		console.log('Error ${error}');
+  	}
+  })
+}
