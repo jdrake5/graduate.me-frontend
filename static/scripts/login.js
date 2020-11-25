@@ -9,7 +9,28 @@ window.addEventListener('load', (event) => {
 });
 
 function validate_user() {
-  //make get request to server, see if value exists
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "http://localhost:3000/users/" + document.getElementById("username").value); // false for synchronous request
+  xmlHttp.send();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == XMLHttpRequest.DONE) {
+      if (xmlHttp.responseText.length == 0) {
+        alert("Username or Password is Incorrect");
+      }
+      else {
+        var result = JSON.parse(xmlHttp.responseText);
+        if (result.Password != document.getElementById("password").value) {
+          alert("Username or Password is Incorrect");
+        }
+        else {
+          console.log(result);
+          sessionStorage.setItem("username", result.Username);
+          var url = "home.html";
+          window.location.href = url;
+        }
+      }
+    }
+  }
 }
 
 function add_newuser() {
@@ -31,19 +52,22 @@ function submit_new_user() {
     password: document.getElementById("password_new").value
   };
 
-  $.ajax({
-  	url:"http://localhost:3000/users",
-  	type:"POST",
-    data: data,
-  	sucess: function(result){
-  		console.log(result);
-  	},
-  	error: function(error){
-  		console.log('Error ${error}');
-  	}
-  })
-  //hope and pray it actually loaded and the submission error is just cors
-  //launch homepage
-  var url = "home.html";
-  window.location.href = url;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", 'http://localhost:3000/users', true);
+
+  //Send the proper header information along with the request
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+  xhr.onreadystatechange = function() { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        sessionStorage.setItem("username", document.getElementById("username_new").value);
+        var url = "home.html";
+        window.location.href = url;
+      }
+      else if (this.readyState === XMLHttpRequest.DONE) {
+        //console.log(xhr.responseText);
+        alert(JSON.parse(xhr.responseText).message);
+      }
+  }
+  xhr.send(JSON.stringify(data));
 }
