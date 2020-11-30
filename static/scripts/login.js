@@ -10,7 +10,8 @@ window.addEventListener('load', (event) => {
 
 function validate_user() {
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", "http://localhost:3000/users/" + document.getElementById("username").value); // false for synchronous request
+  var query = document.getElementById("username").value.replace(/\W/g, '');
+  xmlHttp.open( "GET", "http://localhost:3000/users/" + query); // false for synchronous request
   xmlHttp.send();
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == XMLHttpRequest.DONE) {
@@ -47,9 +48,9 @@ function add_newuser() {
 
 function submit_new_user() {
   let data = {
-    username: document.getElementById("username_new").value,
-    email: document.getElementById("email_new").value,
-    password: document.getElementById("password_new").value
+    username: (document.getElementById("username_new").value).replace(/\W/g, ''),
+    email: (document.getElementById("email_new").value).replace(/\W/g, ''),
+    password: (document.getElementById("password_new").value).replace(/\W/g, '')
   };
 
   var xhr = new XMLHttpRequest();
