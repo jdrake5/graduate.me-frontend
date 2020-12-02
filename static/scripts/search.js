@@ -39,10 +39,10 @@ function addFavorite() {
   if (this.checked) {
     console.log("Checkbox is checked.." + this.id);
     let data = {
-      Username: "atlas"/*fancy stuff with response*/,
-      Subject: "AAS"/*fancy stuff with response*/,
-      Number: "100" /*fancy stuff with response*/,
-      Sub_Num: "AAS_100" /*fancy stuff with response*/
+      Username: sessionStorage.getItem("username")/*currentResponse[this.id[-2:]].Username*/,
+      Subject: "CS" /*currentResponse[this.id[-2:]].Subject*/,
+      Number: "411" /*currentResponse[this.id[-2:]].Number*/,
+      Sub_Num: "CS_411" /*currentResponse[this.id[-2:]].Sub_Num*/
     };
 
     var xhr = new XMLHttpRequest();
